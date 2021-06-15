@@ -55,9 +55,9 @@ def get_args():
                         help='Train the agent against baseline of env.')
 
     # Evaluation Arguments
-    parser.add_argument('--load-model', type=str, default=None,
+    parser.add_argument('--load-model', type=str, default='0',
                         help='Pretrained model name to load (state dict)')
-    parser.add_argument('--save-model', type=str, default='model',
+    parser.add_argument('--save-model', type=str, default='0',
                         help='Pretrained model name to save (state dict)')
     parser.add_argument('--evaluate', action='store_true',
                         help='Evaluate only')
