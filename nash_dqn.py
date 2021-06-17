@@ -54,7 +54,7 @@ class ParallelNashAgent():
                 # ne = NashEquilibriumLPSolver(qs)
                 # ne = NashEquilibriumCVXPYSolver(qs)
                 # ne = NashEquilibriumGUROBISolver(qs)
-                ne = NashEquilibriumECOSSolver(qs)
+                ne = NashEquilibriumECOSSolver(qs)  # return a list of equilibrium policy distribution for each player
 
             except:  # some cases NE cannot be solved
                 print('No Nash solution for: ', np.linalg.det(qs), qs)
@@ -189,6 +189,7 @@ def train(env, args, writer, model_path, num_agents=2):
         done = [np.float32(d) for d in dones]
 
         # states (env, agent, state_dim) -> (env, agent*state_dim), similar for actions_, rewards take the positive one in two agents 
+        # if np.all(d) is True, the states and rewards will be absent for some environments, so remove such sample.
         samples = [[states[j].reshape(-1), actions_[j].reshape(-1), rewards[j, 0], next_states[j].reshape(-1), d] for j, d in enumerate(done) if not np.all(d)]
         agent.replay_buffer.push(samples) 
         
@@ -257,7 +258,6 @@ def compute_rl_loss(agent, args):
     current_model, target_model, replay_buffer, optimizer = agent.current_model, agent.target_model, agent.replay_buffer, agent.rl_optimizer
     state, action, reward, next_state, done = replay_buffer.sample(args.batch_size)
     weights = torch.ones(args.batch_size)
-    # print(state.shape)
     state = torch.FloatTensor(np.float32(state)).to(args.device)
     next_state = torch.FloatTensor(np.float32(next_state)).to(args.device)
     # action = torch.LongTensor(action).to(args.device)
@@ -304,8 +304,7 @@ def compute_rl_loss(agent, args):
         # softmax = torch.nn.Softmax(dim=-1)
         # next_q_value = torch.FloatTensor(target_next_q_values).to(args.device)
         # prob = softmax(next_q_value)
-        # next_q_value = torch.sum(next_q_value*prob, dim=-1)
-
+        # next_q_value = torch.sum(next_q_value*prob, dim=-1))
     expected_q_value = reward + (args.gamma ** args.multi_step) * next_q_value * (1 - done)
 
     # Huber Loss
