@@ -236,7 +236,9 @@ def make_env(args):
 
             # allow agent to see everything on the screen despite Atari's flickering screen problem
             env = supersuit.frame_stack_v1(env, 4)
-
+        else:
+            env = supersuit.frame_skip_v0(env, 4)  # RAM version also need frame skip, essential for boxing-v1, etc
+        
         #   env = PettingZooWrapper(env)  # need to be put at the end
         
         # normalize the observation of Atari for both image or RAM 
