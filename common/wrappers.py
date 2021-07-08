@@ -486,7 +486,7 @@ class SlimeVolleyWrapper(gym.Wrapper):
                 obs1, reward, done, info = self.env.step(*actions_) # extra argument
             obs2 = info['otherObs']
             rewards[self.agents[0]] = reward
-            rewards[self.agents[1]] = -reward # the reward is for the learnable agent (second)
+            rewards[self.agents[1]] = -reward
 
         obs[self.agents[0]] = obs1
         obs[self.agents[1]] = obs2
