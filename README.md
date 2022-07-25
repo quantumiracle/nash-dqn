@@ -27,13 +27,13 @@ Others are general ML packages, like torch, tensorboard, numpy, gym, etc.
 To train Nash-DQN on two-agent zero-sum game, *boxing-v2* in Pettingzoo, run:
 
 ```bash
-python launch.py --env boxing_v2
+python launch.py --env pettingzoo_boxing_v2 --method nash_dqn
 ```
 
 Test after training:
 
 ```bash
-python launch.py --env boxing_v2 --test --render
+python launch.py --env pettingzoo_boxing_v2 --method nash_dqn --test --render
 ```
 
 ## Detailed Instructions
