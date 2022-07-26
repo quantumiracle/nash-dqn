@@ -103,3 +103,14 @@ Full list of configurations:
     * '--marl_spec.min_update_interval', type=int, default=20, help='mininal opponent update interval in unit of episodes'
     * '--marl_spec.score_avg_window', type=int, default=10, help='the length of window for averaging the score values'
     * '--marl_spec.global_state', type=bool, default=False, help='whether using global observation'
+    
+   ## Citation
+   ```
+   @article{ding2022deep,
+  title={A Deep Reinforcement Learning Approach for Finding Non-Exploitable Strategies in Two-Player Atari Games},
+  author={Ding, Zihan and Su, Dijia and Liu, Qinghua and Jin, Chi},
+  journal={arXiv preprint arXiv:2207.08894},
+  year={2022}
+}
+
+   ```
