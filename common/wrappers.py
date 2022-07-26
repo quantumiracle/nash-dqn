@@ -4,6 +4,24 @@ import gym
 from supersuit.utils.make_defaultdict import make_defaultdict
 import numpy as np
 
+# PettingZoo envs
+pettingzoo_envs = {
+    'atari': [
+        'basketball_pong_v3', 'boxing_v2', 'combat_plane_v1', 'combat_tank_v2',
+        'double_dunk_v3', 'entombed_competitive_v3', 'entombed_cooperative_v3',
+        'flag_capture_v2', 'foozpong_v3', 'ice_hockey_v2', 'joust_v3',
+        'mario_bros_v3', 'maze_craze_v3', 'othello_v3', 'pong_v3',
+        'quadrapong_v4', 'space_invaders_v2', 'space_war_v2', 'surround_v2',
+        'tennis_v3', 'video_checkers_v4', 'volleyball_pong_v2', 'warlords_v3',
+        'wizard_of_wor_v3'
+    ],
+
+    'classic': [
+        'dou_dizhu_v4', 'go_v5', 'leduc_holdem_v4', 'rps_v2',
+        'texas_holdem_no_limit_v6', 'texas_holdem_v4', 'tictactoe_v3', 'uno_v4'
+    ]
+}
+
 class aec_reward_lambda(PettingzooWrap):
     def __init__(self, env, change_reward_fn):
         assert callable(

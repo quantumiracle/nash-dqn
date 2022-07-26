@@ -4,7 +4,7 @@ import torch
 from torch.utils.tensorboard import SummaryWriter
 import numpy as np
 from datetime import datetime
-from common.wrappers import reward_lambda_v1, zero_sum_reward_filer, SSVecWrapper
+from common.wrappers import pettingzoo_envs, reward_lambda_v1, zero_sum_reward_filer, SSVecWrapper
 from nash_dqn import NashDQN
 from common.args_parser import get_args, init_wandb
 
@@ -138,25 +138,6 @@ def rollout(env, model, args):
         # Model saving and logging
         if epi % args.save_interval == 0:
             model.save_model(model_dir+f'{epi}')
-
-
-# PettingZoo envs
-pettingzoo_envs = {
-    'atari': [
-        'basketball_pong_v3', 'boxing_v2', 'combat_plane_v1', 'combat_tank_v2',
-        'double_dunk_v3', 'entombed_competitive_v3', 'entombed_cooperative_v3',
-        'flag_capture_v2', 'foozpong_v3', 'ice_hockey_v2', 'joust_v3',
-        'mario_bros_v3', 'maze_craze_v3', 'othello_v3', 'pong_v3',
-        'quadrapong_v4', 'space_invaders_v2', 'space_war_v2', 'surround_v2',
-        'tennis_v3', 'video_checkers_v4', 'volleyball_pong_v2', 'warlords_v3',
-        'wizard_of_wor_v3'
-    ],
-
-    'classic': [
-        'dou_dizhu_v4', 'go_v5', 'leduc_holdem_v4', 'rps_v2',
-        'texas_holdem_no_limit_v6', 'texas_holdem_v4', 'tictactoe_v3', 'uno_v4'
-    ]
-}
 
 for env_type, envs in pettingzoo_envs.items():
     for env_name in envs:
