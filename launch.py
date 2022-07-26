@@ -119,11 +119,11 @@ def rollout(env, model, args):
             ):  # if any player in a game is done, the game episode done; may not be correct for some envs
                 break
         
-        # print(epi, reward, loss)
         for i in range(env.num_agents):
             writer.add_scalar(f"charts/episodic_return-player{i}", np.mean(epi_reward, axis=0)[i], epi)
         writer.add_scalar(f"charts/loss", loss, epi)
         writer.add_scalar(f"charts/episode_steps", step, epi)
+        print(epi, np.mean(epi_reward, axis=0)[0], loss)
 
 
         ## Evaluation during exploiter training
