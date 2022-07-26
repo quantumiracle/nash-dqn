@@ -27,13 +27,19 @@ Others are general ML packages, like torch, tensorboard, numpy, gym, etc.
 To train Nash-DQN on two-agent zero-sum game, *boxing-v2* in Pettingzoo, run:
 
 ```bash
-python launch.py --env boxing_v2
+python launch.py --env pettingzoo_boxing_v2 --method nash_dqn
+```
+
+Train with [Wandb](https://wandb.ai) (for logging training results):
+
+```
+python launch.py --env pettingzoo_boxing_v2 --method nash_dqn --wandb_activate True --wandb_entity **YourWandbAccountName** --wandb_project **ProjectName**
 ```
 
 Test after training:
 
 ```bash
-python launch.py --env boxing_v2 --test --render
+python launch.py --env pettingzoo_boxing_v2 --method nash_dqn --test --render
 ```
 
 ## Detailed Instructions
@@ -97,3 +103,14 @@ Full list of configurations:
     * '--marl_spec.min_update_interval', type=int, default=20, help='mininal opponent update interval in unit of episodes'
     * '--marl_spec.score_avg_window', type=int, default=10, help='the length of window for averaging the score values'
     * '--marl_spec.global_state', type=bool, default=False, help='whether using global observation'
+    
+   ## Citation
+   ```
+   @article{ding2022deep,
+  title={A Deep Reinforcement Learning Approach for Finding Non-Exploitable Strategies in Two-Player Atari Games},
+  author={Ding, Zihan and Su, Dijia and Liu, Qinghua and Jin, Chi},
+  journal={arXiv preprint arXiv:2207.08894},
+  year={2022}
+}
+
+   ```
