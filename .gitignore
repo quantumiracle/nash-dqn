@@ -3,6 +3,7 @@ model/
 wandb/
 deprecated/
 runs/
+log/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
