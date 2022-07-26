@@ -23,10 +23,12 @@ def rollout(env, model, args):
     ## Initialization
     print("Arguments: ", args)
     overall_steps = 0
-    if args.wandb_activate:
-        init_wandb(args)
     time_string = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
     run_name = '_'.join((args.env_name, args.algorithm, time_string))
+    if args.wandb_activate:
+        if not args.wandb_project:
+            args.wandb_project = run_name
+        init_wandb(args)
     model_dir = f'./model/{run_name}/'
     os.makedirs(model_dir, exist_ok=True)
     writer = SummaryWriter(f"runs/{run_name}")
@@ -123,7 +125,7 @@ def rollout(env, model, args):
             writer.add_scalar(f"charts/episodic_return-player{i}", np.mean(epi_reward, axis=0)[i], epi)
         writer.add_scalar(f"charts/loss", loss, epi)
         writer.add_scalar(f"charts/episode_steps", step, epi)
-        print(epi, np.mean(epi_reward, axis=0)[0], loss)
+        print(f"Episode: {epi}, Reward: {np.mean(epi_reward, axis=0)[0]:.4f}, Loss: {loss:.4f}")
 
 
         ## Evaluation during exploiter training
