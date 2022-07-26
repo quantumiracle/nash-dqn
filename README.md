@@ -1,5 +1,9 @@
 # Nash-DQN
 
+This repository provides a standalone version of **Nash-DQN** algorithm for two-player zero-sum Markov games, details see [**our paper**: A Deep Reinforcement Learning Approach for Finding Non-Exploitable Strategies in Two-Player Atari Games. Zihan Ding, Dijia Su, Qinghua Liu, Chi Jin](https://arxiv.org/abs/2207.08894). 
+
+The **Nash-DQN** algorithm is also compared against other baselines methods like Self-play, Fictitious Self-play, Neural Fictitious Self-play, Policy Space Response Oracle, but in another library called [**MARS**](https://github.com/quantumiracle/MARS).
+
 ## File Structure
 
 * `equilibrium_solver/` contains different solvers for Nash equilibrium, including [ECOS](https://github.com/embotech/ecos), [Nashpy](https://github.com/drvinceknight/Nashpy), [PuLP](https://github.com/coin-or/pulp), [CVXPY](https://github.com/cvxpy/cvxpy), [Gurobipy](https://www.gurobi.com/), etc.
