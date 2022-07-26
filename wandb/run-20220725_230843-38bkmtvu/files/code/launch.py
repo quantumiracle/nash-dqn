@@ -96,6 +96,7 @@ def rollout(env, model, args):
             model.store(sample)
 
             obs = obs_
+            # logger.log_reward(np.array(reward).reshape(-1))
 
             epi_reward.append(np.mean(reward, axis=0))
             loss = None
@@ -120,7 +121,7 @@ def rollout(env, model, args):
                 break
         
         # print(epi, reward, loss)
-        for i in range(env.num_agents):
+        for i in range(env.num_players):
             writer.add_scalar(f"charts/episodic_return-player{i}", np.mean(epi_reward, axis=0)[i], epi)
         writer.add_scalar(f"charts/loss", loss, epi)
         writer.add_scalar(f"charts/episode_steps", step, epi)

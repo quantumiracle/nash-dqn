@@ -1,0 +1,1 @@
+{"global_step": 2, "_timestamp": 1658805172.6773903, "charts/episodic_return-player0": -0.006666666828095913, "charts/episodic_return-player1": 0.006666666828095913, "charts/loss": 0.008040530607104301, "charts/episode_steps": 299.0, "_runtime": 87, "_step": 2}

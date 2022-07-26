@@ -1,0 +1,92 @@
+diff --git a/launch.py b/launch.py
+index cd1948c..e02bc82 100644
+--- a/launch.py
++++ b/launch.py
+@@ -1,9 +1,12 @@
+ import supersuit, gym
++import os
+ import torch
++from torch.utils.tensorboard import SummaryWriter
+ import numpy as np
++from datetime import datetime
+ from common.wrappers import reward_lambda_v1, zero_sum_reward_filer, SSVecWrapper
+ from nash_dqn import NashDQN
+-from common.args_parser import get_args
++from common.args_parser import get_args, init_wandb
+ 
+ 
+ def rollout(env, model, args):
+@@ -20,6 +23,17 @@ def rollout(env, model, args):
+     ## Initialization
+     print("Arguments: ", args)
+     overall_steps = 0
++    if args.wandb_activate:
++        init_wandb(args)
++    time_string = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
++    run_name = '_'.join((args.env_name, args.algorithm, time_string))
++    model_dir = f'./model/{run_name}/'
++    os.makedirs(model_dir, exist_ok=True)
++    writer = SummaryWriter(f"runs/{run_name}")
++    writer.add_text(
++        "hyperparameters",
++        "|param|value|\n|-|-|\n%s" % ("\n".join([f"|{key}|{value}|" for key, value in vars(args).items()])),
++    )
+ 
+     def choose_action(states, args, model):
+         greedy = True if args.test else False
+@@ -32,6 +46,7 @@ def rollout(env, model, args):
+     ## Rollout
+     for epi in range(args.max_episodes):
+         obs = env.reset()
++        epi_reward = []
+         for step in range(args.max_steps_per_episode):
+             overall_steps += 1
+             obs_to_store = obs.swapaxes(0, 1) if args.num_envs > 1 else obs  # transform from (envs, agents, dim) to (agents, envs, dim)
+@@ -82,6 +97,8 @@ def rollout(env, model, args):
+ 
+             obs = obs_
+             # logger.log_reward(np.array(reward).reshape(-1))
++
++            epi_reward.append(np.mean(reward, axis=0))
+             loss = None
+ 
+             # Non-epsodic update of the model
+@@ -96,8 +113,6 @@ def rollout(env, model, args):
+                     loss = np.mean(avg_loss, axis=0)
+                 elif overall_steps * args.update_itr % 1 == 0:
+                     loss = model.update()
+-                # if loss is not None:
+-                    # logger.log_loss(loss)
+ 
+             ## done break: needs to go after everything else， including the update
+             if np.any(
+@@ -105,9 +120,12 @@ def rollout(env, model, args):
+             ):  # if any player in a game is done, the game episode done; may not be correct for some envs
+                 break
+         
+-        print(epi, reward, loss)
+-            
+-        # logger.log_episode_reward(step)
++        # print(epi, reward, loss)
++        for i in range(env.num_players):
++            writer.add_scalar(f"charts/episodic_return-player{i}", np.mean(epi_reward, axis=0)[i], epi)
++        writer.add_scalar(f"charts/loss", loss, epi)
++        writer.add_scalar(f"charts/episode_steps", step, epi)
++
+ 
+         ## Evaluation during exploiter training
+         # if epi % args.log_interval == 0:
+@@ -116,10 +134,9 @@ def rollout(env, model, args):
+ 
+             # logger.print_and_save()
+ 
+-        ## Model saving and logging
+-        # if epi % args.save_interval == 0 \
+-        #     and logger.model_dir is not None:
+-        #     model.save_model(logger.model_dir+f'{epi}')
++        # Model saving and logging
++        if epi % args.save_interval == 0:
++            model.save_model(model_dir+f'{epi}')
+ 
+ 
+ # PettingZoo envs

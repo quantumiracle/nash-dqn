@@ -1,5 +1,4 @@
 import supersuit, gym
-import os
 import torch
 from torch.utils.tensorboard import SummaryWriter
 import numpy as np
@@ -24,11 +23,9 @@ def rollout(env, model, args):
     print("Arguments: ", args)
     overall_steps = 0
     if args.wandb_activate:
-        init_wandb(args)
+        init_wandb()
     time_string = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
     run_name = '_'.join((args.env_name, args.algorithm, time_string))
-    model_dir = f'./model/{run_name}/'
-    os.makedirs(model_dir, exist_ok=True)
     writer = SummaryWriter(f"runs/{run_name}")
     writer.add_text(
         "hyperparameters",
@@ -46,7 +43,6 @@ def rollout(env, model, args):
     ## Rollout
     for epi in range(args.max_episodes):
         obs = env.reset()
-        epi_reward = []
         for step in range(args.max_steps_per_episode):
             overall_steps += 1
             obs_to_store = obs.swapaxes(0, 1) if args.num_envs > 1 else obs  # transform from (envs, agents, dim) to (agents, envs, dim)
@@ -96,8 +92,7 @@ def rollout(env, model, args):
             model.store(sample)
 
             obs = obs_
-
-            epi_reward.append(np.mean(reward, axis=0))
+            # logger.log_reward(np.array(reward).reshape(-1))
             loss = None
 
             # Non-epsodic update of the model
@@ -112,6 +107,8 @@ def rollout(env, model, args):
                     loss = np.mean(avg_loss, axis=0)
                 elif overall_steps * args.update_itr % 1 == 0:
                     loss = model.update()
+                # if loss is not None:
+                    # logger.log_loss(loss)
 
             ## done break: needs to go after everything else， including the update
             if np.any(
@@ -120,11 +117,10 @@ def rollout(env, model, args):
                 break
         
         # print(epi, reward, loss)
-        for i in range(env.num_agents):
-            writer.add_scalar(f"charts/episodic_return-player{i}", np.mean(epi_reward, axis=0)[i], epi)
+        writer.add_scalar(f"charts/episodic_return-player{0}", np.mean(reward, axis=0)[0], epi)
         writer.add_scalar(f"charts/loss", loss, epi)
-        writer.add_scalar(f"charts/episode_steps", step, epi)
 
+        # logger.log_episode_reward(step)
 
         ## Evaluation during exploiter training
         # if epi % args.log_interval == 0:
@@ -133,9 +129,10 @@ def rollout(env, model, args):
 
             # logger.print_and_save()
 
-        # Model saving and logging
-        if epi % args.save_interval == 0:
-            model.save_model(model_dir+f'{epi}')
+        ## Model saving and logging
+        # if epi % args.save_interval == 0 \
+        #     and logger.model_dir is not None:
+        #     model.save_model(logger.model_dir+f'{epi}')
 
 
 # PettingZoo envs
