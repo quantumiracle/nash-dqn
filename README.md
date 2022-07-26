@@ -16,13 +16,13 @@ The **Nash-DQN** algorithm is also compared against other baselines methods like
 
 ## Requirements
 
-The ECOS solver is needed, which can be installed via:
-
 ```bash
-pip install ecos
+pip install -r requirements.txt
 ```
 
-Others are general ML packages, like torch, tensorboard, numpy, gym, etc.
+The ECOS solver is needed, which can be installed via `pip install ecos`.
+
+Others are general ML packages, like torch, tensorboard, numpy, gym, pettingzoo, supersuit, etc.
 
 
 
