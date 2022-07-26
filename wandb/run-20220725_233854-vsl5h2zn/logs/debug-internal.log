@@ -1,0 +1,159 @@
+2022-07-25 23:38:55,570 INFO    MainThread:196119 [internal.py:wandb_internal():93] W&B internal server running at pid: 196119, started at: 2022-07-25 23:38:55.570639
+2022-07-25 23:38:55,574 INFO    WriterThread:196119 [datastore.py:open_for_write():75] open: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/run-vsl5h2zn.wandb
+2022-07-25 23:38:55,578 DEBUG   SenderThread:196119 [sender.py:send():235] send: header
+2022-07-25 23:38:55,579 DEBUG   SenderThread:196119 [sender.py:send():235] send: run
+2022-07-25 23:38:55,757 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: check_version
+2022-07-25 23:38:55,757 INFO    SenderThread:196119 [dir_watcher.py:__init__():205] watching files in: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files
+2022-07-25 23:38:55,758 INFO    SenderThread:196119 [sender.py:_start_run_threads():815] run started: vsl5h2zn with start time 1658806734
+2022-07-25 23:38:55,758 DEBUG   SenderThread:196119 [sender.py:send():235] send: summary
+2022-07-25 23:38:55,758 INFO    SenderThread:196119 [sender.py:_save_file():949] saving file wandb-summary.json with policy end
+2022-07-25 23:38:55,759 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: check_version
+2022-07-25 23:38:55,823 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: run_start
+2022-07-25 23:38:55,831 DEBUG   HandlerThread:196119 [meta.py:__init__():35] meta init
+2022-07-25 23:38:55,832 DEBUG   HandlerThread:196119 [meta.py:__init__():49] meta init done
+2022-07-25 23:38:55,832 DEBUG   HandlerThread:196119 [meta.py:probe():209] probe
+2022-07-25 23:38:55,839 DEBUG   HandlerThread:196119 [meta.py:_setup_git():199] setup git
+2022-07-25 23:38:55,870 DEBUG   HandlerThread:196119 [meta.py:_setup_git():206] setup git done
+2022-07-25 23:38:55,870 DEBUG   HandlerThread:196119 [meta.py:_save_code():87] save code
+2022-07-25 23:38:55,883 DEBUG   HandlerThread:196119 [meta.py:_save_code():108] save code done
+2022-07-25 23:38:55,883 DEBUG   HandlerThread:196119 [meta.py:_save_patches():125] save patches
+2022-07-25 23:38:55,973 DEBUG   HandlerThread:196119 [meta.py:_save_patches():167] save patches done
+2022-07-25 23:38:55,973 DEBUG   HandlerThread:196119 [meta.py:_save_pip():53] save pip
+2022-07-25 23:38:55,975 DEBUG   HandlerThread:196119 [meta.py:_save_pip():67] save pip done
+2022-07-25 23:38:55,975 DEBUG   HandlerThread:196119 [meta.py:_save_conda():74] save conda
+2022-07-25 23:38:56,763 INFO    Thread-7  :196119 [dir_watcher.py:_on_file_created():256] file/dir created: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/wandb-summary.json
+2022-07-25 23:38:56,764 INFO    Thread-7  :196119 [dir_watcher.py:_on_file_created():256] file/dir created: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/code/launch.py
+2022-07-25 23:38:56,764 INFO    Thread-7  :196119 [dir_watcher.py:_on_file_created():256] file/dir created: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/diff.patch
+2022-07-25 23:38:56,765 INFO    Thread-7  :196119 [dir_watcher.py:_on_file_created():256] file/dir created: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/requirements.txt
+2022-07-25 23:38:56,765 INFO    Thread-7  :196119 [dir_watcher.py:_on_file_created():256] file/dir created: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/conda-environment.yaml
+2022-07-25 23:38:56,766 INFO    Thread-7  :196119 [dir_watcher.py:_on_file_created():256] file/dir created: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/code
+2022-07-25 23:39:00,195 DEBUG   HandlerThread:196119 [meta.py:_save_conda():84] save conda done
+2022-07-25 23:39:00,196 DEBUG   HandlerThread:196119 [meta.py:probe():247] probe done
+2022-07-25 23:39:00,240 DEBUG   SenderThread:196119 [sender.py:send():235] send: files
+2022-07-25 23:39:00,241 INFO    SenderThread:196119 [sender.py:_save_file():949] saving file wandb-metadata.json with policy now
+2022-07-25 23:39:00,242 INFO    SenderThread:196119 [sender.py:_save_file():949] saving file code/launch.py with policy now
+2022-07-25 23:39:00,243 INFO    SenderThread:196119 [sender.py:_save_file():949] saving file diff.patch with policy now
+2022-07-25 23:39:00,254 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: stop_status
+2022-07-25 23:39:00,254 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: stop_status
+2022-07-25 23:39:00,378 INFO    Thread-12 :196119 [upload_job.py:push():112] Skipped uploading /tmp/tmpcm5kf42twandb/15kblf3w-code/launch.py
+2022-07-25 23:39:00,382 DEBUG   SenderThread:196119 [sender.py:send():235] send: telemetry
+2022-07-25 23:39:00,383 DEBUG   SenderThread:196119 [sender.py:send():235] send: telemetry
+2022-07-25 23:39:00,676 INFO    Thread-13 :196119 [upload_job.py:push():132] Uploaded file /tmp/tmpcm5kf42twandb/e42hbg1p-diff.patch
+2022-07-25 23:39:00,681 INFO    Thread-11 :196119 [upload_job.py:push():132] Uploaded file /tmp/tmpcm5kf42twandb/10jt3unl-wandb-metadata.json
+2022-07-25 23:39:00,767 INFO    Thread-7  :196119 [dir_watcher.py:_on_file_modified():269] file/dir modified: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/conda-environment.yaml
+2022-07-25 23:39:00,768 INFO    Thread-7  :196119 [dir_watcher.py:_on_file_created():256] file/dir created: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/wandb-metadata.json
+2022-07-25 23:39:00,768 INFO    Thread-7  :196119 [dir_watcher.py:_on_file_created():256] file/dir created: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/output.log
+2022-07-25 23:39:02,763 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: poll_exit
+2022-07-25 23:39:02,764 DEBUG   SenderThread:196119 [sender.py:send():235] send: exit
+2022-07-25 23:39:02,764 INFO    SenderThread:196119 [sender.py:send_exit():371] handling exit code: 1
+2022-07-25 23:39:02,764 INFO    SenderThread:196119 [sender.py:send_exit():373] handling runtime: 6
+2022-07-25 23:39:02,769 INFO    SenderThread:196119 [sender.py:_save_file():949] saving file wandb-summary.json with policy end
+2022-07-25 23:39:02,770 INFO    SenderThread:196119 [sender.py:send_exit():379] send defer
+2022-07-25 23:39:02,770 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: poll_exit
+2022-07-25 23:39:02,772 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: defer
+2022-07-25 23:39:02,772 INFO    HandlerThread:196119 [handler.py:handle_request_defer():164] handle defer: 0
+2022-07-25 23:39:02,773 INFO    Thread-7  :196119 [dir_watcher.py:_on_file_modified():269] file/dir modified: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/wandb-summary.json
+2022-07-25 23:39:02,773 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: defer
+2022-07-25 23:39:02,774 INFO    SenderThread:196119 [sender.py:send_request_defer():388] handle sender defer: 0
+2022-07-25 23:39:02,774 INFO    SenderThread:196119 [sender.py:transition_state():392] send defer: 1
+2022-07-25 23:39:02,774 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: defer
+2022-07-25 23:39:02,775 INFO    HandlerThread:196119 [handler.py:handle_request_defer():164] handle defer: 1
+2022-07-25 23:39:02,875 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: poll_exit
+2022-07-25 23:39:02,876 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: defer
+2022-07-25 23:39:02,877 INFO    SenderThread:196119 [sender.py:send_request_defer():388] handle sender defer: 1
+2022-07-25 23:39:02,877 INFO    SenderThread:196119 [sender.py:transition_state():392] send defer: 2
+2022-07-25 23:39:02,877 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: poll_exit
+2022-07-25 23:39:02,877 DEBUG   SenderThread:196119 [sender.py:send():235] send: stats
+2022-07-25 23:39:02,879 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: defer
+2022-07-25 23:39:02,879 INFO    HandlerThread:196119 [handler.py:handle_request_defer():164] handle defer: 2
+2022-07-25 23:39:02,879 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: defer
+2022-07-25 23:39:02,880 INFO    SenderThread:196119 [sender.py:send_request_defer():388] handle sender defer: 2
+2022-07-25 23:39:02,880 INFO    SenderThread:196119 [sender.py:transition_state():392] send defer: 3
+2022-07-25 23:39:02,881 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: defer
+2022-07-25 23:39:02,881 INFO    HandlerThread:196119 [handler.py:handle_request_defer():164] handle defer: 3
+2022-07-25 23:39:02,881 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: defer
+2022-07-25 23:39:02,882 INFO    SenderThread:196119 [sender.py:send_request_defer():388] handle sender defer: 3
+2022-07-25 23:39:02,882 INFO    SenderThread:196119 [sender.py:transition_state():392] send defer: 4
+2022-07-25 23:39:02,883 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: defer
+2022-07-25 23:39:02,883 INFO    HandlerThread:196119 [handler.py:handle_request_defer():164] handle defer: 4
+2022-07-25 23:39:02,883 DEBUG   SenderThread:196119 [sender.py:send():235] send: summary
+2022-07-25 23:39:02,886 INFO    SenderThread:196119 [sender.py:_save_file():949] saving file wandb-summary.json with policy end
+2022-07-25 23:39:02,887 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: defer
+2022-07-25 23:39:02,887 INFO    SenderThread:196119 [sender.py:send_request_defer():388] handle sender defer: 4
+2022-07-25 23:39:02,887 INFO    SenderThread:196119 [sender.py:transition_state():392] send defer: 5
+2022-07-25 23:39:02,888 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: defer
+2022-07-25 23:39:02,888 INFO    HandlerThread:196119 [handler.py:handle_request_defer():164] handle defer: 5
+2022-07-25 23:39:02,888 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: defer
+2022-07-25 23:39:02,889 INFO    SenderThread:196119 [sender.py:send_request_defer():388] handle sender defer: 5
+2022-07-25 23:39:02,981 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: poll_exit
+2022-07-25 23:39:03,067 INFO    SenderThread:196119 [sender.py:transition_state():392] send defer: 6
+2022-07-25 23:39:03,067 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: poll_exit
+2022-07-25 23:39:03,068 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: defer
+2022-07-25 23:39:03,068 INFO    HandlerThread:196119 [handler.py:handle_request_defer():164] handle defer: 6
+2022-07-25 23:39:03,069 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: defer
+2022-07-25 23:39:03,069 INFO    SenderThread:196119 [sender.py:send_request_defer():388] handle sender defer: 6
+2022-07-25 23:39:03,069 INFO    SenderThread:196119 [dir_watcher.py:finish():336] shutting down directory watcher
+2022-07-25 23:39:03,170 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: poll_exit
+2022-07-25 23:39:03,773 INFO    Thread-7  :196119 [dir_watcher.py:_on_file_modified():269] file/dir modified: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/config.yaml
+2022-07-25 23:39:03,775 INFO    SenderThread:196119 [dir_watcher.py:_on_file_modified():269] file/dir modified: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/wandb-summary.json
+2022-07-25 23:39:03,775 INFO    SenderThread:196119 [dir_watcher.py:finish():366] scan: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files
+2022-07-25 23:39:03,776 INFO    SenderThread:196119 [dir_watcher.py:finish():380] scan save: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/requirements.txt requirements.txt
+2022-07-25 23:39:03,776 INFO    SenderThread:196119 [dir_watcher.py:finish():380] scan save: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/wandb-metadata.json wandb-metadata.json
+2022-07-25 23:39:03,776 INFO    SenderThread:196119 [dir_watcher.py:finish():380] scan save: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/conda-environment.yaml conda-environment.yaml
+2022-07-25 23:39:03,777 INFO    SenderThread:196119 [dir_watcher.py:finish():380] scan save: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/config.yaml config.yaml
+2022-07-25 23:39:03,787 INFO    SenderThread:196119 [dir_watcher.py:finish():380] scan save: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/output.log output.log
+2022-07-25 23:39:03,796 INFO    SenderThread:196119 [dir_watcher.py:finish():380] scan save: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/wandb-summary.json wandb-summary.json
+2022-07-25 23:39:03,805 INFO    SenderThread:196119 [dir_watcher.py:finish():380] scan save: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/diff.patch diff.patch
+2022-07-25 23:39:03,807 INFO    SenderThread:196119 [dir_watcher.py:finish():380] scan save: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/code/launch.py code/launch.py
+2022-07-25 23:39:03,813 INFO    SenderThread:196119 [sender.py:transition_state():392] send defer: 7
+2022-07-25 23:39:03,817 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: poll_exit
+2022-07-25 23:39:03,819 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: defer
+2022-07-25 23:39:03,819 INFO    HandlerThread:196119 [handler.py:handle_request_defer():164] handle defer: 7
+2022-07-25 23:39:03,820 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: defer
+2022-07-25 23:39:03,820 INFO    SenderThread:196119 [sender.py:send_request_defer():388] handle sender defer: 7
+2022-07-25 23:39:03,820 INFO    SenderThread:196119 [file_pusher.py:finish():145] shutting down file pusher
+2022-07-25 23:39:03,929 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: poll_exit
+2022-07-25 23:39:03,931 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: poll_exit
+2022-07-25 23:39:04,042 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: poll_exit
+2022-07-25 23:39:04,043 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: poll_exit
+2022-07-25 23:39:04,145 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: poll_exit
+2022-07-25 23:39:04,146 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: poll_exit
+2022-07-25 23:39:04,192 INFO    Thread-14 :196119 [upload_job.py:push():132] Uploaded file /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/requirements.txt
+2022-07-25 23:39:04,215 INFO    Thread-15 :196119 [upload_job.py:push():132] Uploaded file /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/conda-environment.yaml
+2022-07-25 23:39:04,219 INFO    Thread-16 :196119 [upload_job.py:push():132] Uploaded file /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/config.yaml
+2022-07-25 23:39:04,230 INFO    Thread-17 :196119 [upload_job.py:push():132] Uploaded file /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/files/wandb-summary.json
+2022-07-25 23:39:04,248 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: poll_exit
+2022-07-25 23:39:04,249 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: poll_exit
+2022-07-25 23:39:04,352 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: poll_exit
+2022-07-25 23:39:04,352 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: poll_exit
+2022-07-25 23:39:04,430 INFO    Thread-6  :196119 [sender.py:transition_state():392] send defer: 8
+2022-07-25 23:39:04,431 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: defer
+2022-07-25 23:39:04,432 INFO    HandlerThread:196119 [handler.py:handle_request_defer():164] handle defer: 8
+2022-07-25 23:39:04,432 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: defer
+2022-07-25 23:39:04,432 INFO    SenderThread:196119 [sender.py:send_request_defer():388] handle sender defer: 8
+2022-07-25 23:39:04,455 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: poll_exit
+2022-07-25 23:39:04,664 INFO    SenderThread:196119 [sender.py:transition_state():392] send defer: 9
+2022-07-25 23:39:04,665 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: poll_exit
+2022-07-25 23:39:04,666 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: defer
+2022-07-25 23:39:04,679 INFO    HandlerThread:196119 [handler.py:handle_request_defer():164] handle defer: 9
+2022-07-25 23:39:04,680 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: defer
+2022-07-25 23:39:04,680 INFO    SenderThread:196119 [sender.py:send_request_defer():388] handle sender defer: 9
+2022-07-25 23:39:04,680 INFO    SenderThread:196119 [sender.py:transition_state():392] send defer: 10
+2022-07-25 23:39:04,681 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: defer
+2022-07-25 23:39:04,682 DEBUG   SenderThread:196119 [sender.py:send():235] send: final
+2022-07-25 23:39:04,682 INFO    HandlerThread:196119 [handler.py:handle_request_defer():164] handle defer: 10
+2022-07-25 23:39:04,683 DEBUG   SenderThread:196119 [sender.py:send():235] send: footer
+2022-07-25 23:39:04,683 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: defer
+2022-07-25 23:39:04,683 INFO    SenderThread:196119 [sender.py:send_request_defer():388] handle sender defer: 10
+2022-07-25 23:39:04,781 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: poll_exit
+2022-07-25 23:39:04,782 DEBUG   SenderThread:196119 [sender.py:send_request():249] send_request: poll_exit
+2022-07-25 23:39:04,782 INFO    SenderThread:196119 [file_pusher.py:join():150] waiting for file pusher
+2022-07-25 23:39:05,074 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: sampled_history
+2022-07-25 23:39:05,076 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: get_summary
+2022-07-25 23:39:05,078 DEBUG   HandlerThread:196119 [handler.py:handle_request():141] handle_request: shutdown
+2022-07-25 23:39:05,078 INFO    HandlerThread:196119 [handler.py:finish():806] shutting down handler
+2022-07-25 23:39:05,682 INFO    WriterThread:196119 [datastore.py:close():279] close: /home/zihan/research/nash-dqn/wandb/run-20220725_233854-vsl5h2zn/run-vsl5h2zn.wandb
+2022-07-25 23:39:05,972 INFO    SenderThread:196119 [sender.py:finish():1111] shutting down sender
+2022-07-25 23:39:05,972 INFO    SenderThread:196119 [file_pusher.py:finish():145] shutting down file pusher
+2022-07-25 23:39:05,972 INFO    SenderThread:196119 [file_pusher.py:join():150] waiting for file pusher
+2022-07-25 23:39:05,976 INFO    MainThread:196119 [internal.py:handle_exit():80] Internal process exited

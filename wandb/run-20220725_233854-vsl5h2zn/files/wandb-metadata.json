@@ -1,0 +1,33 @@
+{
+    "os": "Linux-5.4.0-122-generic-x86_64-with-debian-bullseye-sid",
+    "python": "3.7.10",
+    "heartbeatAt": "2022-07-26T03:38:55.832389",
+    "startedAt": "2022-07-26T03:38:54.824808",
+    "docker": null,
+    "gpu": "NVIDIA TITAN RTX",
+    "gpu_count": 2,
+    "cpu_count": 32,
+    "cuda": "11.0.207",
+    "args": [
+        "--env",
+        "pettingzoo_boxing_v2",
+        "--method",
+        "nash_dqn",
+        "--wandb_activate",
+        "True",
+        "--wandb_entity",
+        "quantumiracle"
+    ],
+    "state": "running",
+    "program": "launch.py",
+    "codePath": "launch.py",
+    "git": {
+        "remote": "https://quantumiracle:@github.com/quantumiracle/nash-dqn.git",
+        "commit": "0ab012b82069c06bd0cc8988e33ef809986df117"
+    },
+    "email": "zhding@mail.ustc.edu.cn",
+    "root": "/home/zihan/research/nash-dqn",
+    "host": "e900-rbtg",
+    "username": "zihan",
+    "executable": "/home/zihan/anaconda3/envs/x/bin/python"
+}
