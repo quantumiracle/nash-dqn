@@ -30,6 +30,12 @@ To train Nash-DQN on two-agent zero-sum game, *boxing-v2* in Pettingzoo, run:
 python launch.py --env pettingzoo_boxing_v2 --method nash_dqn
 ```
 
+Train with [Wandb](https://wandb.ai) (for logging training results):
+
+```
+python launch.py --env pettingzoo_boxing_v2 --method nash_dqn --wandb_activate True --wandb_entity **YourWandbAccountName** --wandb_project **ProjectName**
+```
+
 Test after training:
 
 ```bash
