@@ -4,9 +4,9 @@ import torch
 from torch.utils.tensorboard import SummaryWriter
 import numpy as np
 from datetime import datetime
-from common.wrappers import pettingzoo_envs, reward_lambda_v1, zero_sum_reward_filer, SSVecWrapper
-from nash_dqn import NashDQN
+from common.wrappers import pettingzoo_envs, reward_lambda_v1, zero_sum_reward_filer, SSVecWrapper, Dict2TupleWrapper
 from common.args_parser import get_args, init_wandb
+from nash_dqn import NashDQN
 
 
 def rollout(env, model, args):
@@ -23,35 +23,40 @@ def rollout(env, model, args):
     ## Initialization
     print("Arguments: ", args)
     overall_steps = 0
-    time_string = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    run_name = '_'.join((args.env_name, args.algorithm, time_string))
-    if args.wandb_activate:
-        if not args.wandb_project:
-            args.wandb_project = run_name
-        init_wandb(args)
-    model_dir = f'./model/{run_name}/'
-    os.makedirs(model_dir, exist_ok=True)
-    writer = SummaryWriter(f"runs/{run_name}")
-    writer.add_text(
-        "hyperparameters",
-        "|param|value|\n|-|-|\n%s" % ("\n".join([f"|{key}|{value}|" for key, value in vars(args).items()])),
-    )
+    if args.test:
+        model.load_model(args.load_model_idx)
+        print(f"Load model from: {args.load_model_idx}")
+    else:
+        time_string = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+        run_name = '_'.join((args.env_name, args.algorithm, time_string))
+        if args.wandb_activate:
+            if not args.wandb_project:
+                args.wandb_project = run_name
+            init_wandb(args)
+        model_dir = f'./model/{run_name}/'
+        os.makedirs(model_dir, exist_ok=True)
+        writer = SummaryWriter(f"runs/{run_name}")
+        writer.add_text(
+            "hyperparameters",
+            "|param|value|\n|-|-|\n%s" % ("\n".join([f"|{key}|{value}|" for key, value in vars(args).items()])),
+        )
 
     def choose_action(states, args, model):
         greedy = True if args.test else False
         if args.marl_spec['global_state']:
             actions = model.choose_action(states, Greedy=greedy)
-        else:
+        else:  # single-side observation (assume complete)
             actions = model.choose_action(np.expand_dims(states[0], 0), Greedy=greedy) 
         return actions       
 
     ## Rollout
     for epi in range(args.max_episodes):
         obs = env.reset()
-        epi_reward = []
+        epi_reward = [] # track rewards within episode
         for step in range(args.max_steps_per_episode):
             overall_steps += 1
-            obs_to_store = obs.swapaxes(0, 1) if args.num_envs > 1 else obs  # transform from (envs, agents, dim) to (agents, envs, dim)
+            # obs_to_store = obs.swapaxes(0, 1) if args.num_envs > 1 else obs  # transform from (envs, agents, dim) to (agents, envs, dim)
+            obs_to_store = obs.swapaxes(0, 1)  # transform from (envs, agents, dim) to (agents, envs, dim)
             with torch.no_grad():
                 action_ = choose_action(
                     obs_to_store, args, model)  # action: (agent, env, action_dim)
@@ -69,41 +74,41 @@ def rollout(env, model, args):
             if args.render:
                 env.render()
 
-            ## Storage information processing
-            if args.num_envs > 1:  # transform from (envs, agents, dim) to (agents, envs, dim)
-                obs__to_store = obs_.swapaxes(0, 1)
-                reward_to_store = reward.swapaxes(0, 1)
-                done_to_store = done.swapaxes(0, 1)
-            else:
-                obs__to_store = obs_
-                reward_to_store = reward
-                done_to_store = done
-
-            sample = [  # each item has shape: (agents, envs, dim)
-                obs_to_store, action_to_store, reward_to_store,
-                obs__to_store, done_to_store
-            ]
-            
-            [states, actions, rewards, next_states, dones] = sample
-            if args.num_envs > 1:  # when num_envs > 1. 
-                if args.marl_spec['global_state']:  # use concatenated observation from both agents
-                    sample = [[states[:, j].reshape(-1), actions[:, j].reshape(-1), rewards[0, j], next_states[:, j].reshape(-1), np.any(d)] for j, d in enumerate(np.array(dones).T)]
-                else:  # only use the observation from the first agent (assume the symmetry in the game and the single state contains the full information: speed up learning!)
-                    sample = [[states[0, j], actions[:, j].reshape(-1), rewards[0, j], next_states[0, j], np.any(d)] for j, d in enumerate(np.array(dones).T)]
-            else:  # when num_envs = 1 
-                if args.marl_spec['global_state']: 
-                    sample = [[np.array(states).reshape(-1), actions, rewards[0], np.array(next_states).reshape(-1), np.all(dones)]]  # done for both player
+            if not args.test:
+                ## Storage information processing
+                if args.num_envs > 1:  # transform from (envs, agents, dim) to (agents, envs, dim)
+                    obs__to_store = obs_.swapaxes(0, 1)
+                    reward_to_store = reward.swapaxes(0, 1)
+                    done_to_store = done.swapaxes(0, 1)
                 else:
-                    sample = [[np.array(states[0]), actions, rewards[0], np.array(next_states[0]), np.all(dones)]]
-            model.store(sample)
+                    obs__to_store = obs_
+                    reward_to_store = reward
+                    done_to_store = done
+
+                sample = [  # each item has shape: (agents, envs, dim)
+                    obs_to_store, action_to_store, reward_to_store,
+                    obs__to_store, done_to_store
+                ]
+                
+                [states, actions, rewards, next_states, dones] = sample
+                if args.num_envs > 1:  # when num_envs > 1. 
+                    if args.marl_spec['global_state']:  # use concatenated observation from both agents
+                        sample = [[states[:, j].reshape(-1), actions[:, j].reshape(-1), rewards[0, j], next_states[:, j].reshape(-1), np.any(d)] for j, d in enumerate(np.array(dones).T)]
+                    else:  # only use the observation from the first agent (assume the symmetry in the game and the single state contains the full information: speed up learning!)
+                        sample = [[states[0, j], actions[:, j].reshape(-1), rewards[0, j], next_states[0, j], np.any(d)] for j, d in enumerate(np.array(dones).T)]
+                else:  # when num_envs = 1 
+                    if args.marl_spec['global_state']: 
+                        sample = [[np.array(states).reshape(-1), actions, rewards[0], np.array(next_states).reshape(-1), np.all(dones)]]  # done for both player
+                    else:
+                        sample = [[np.array(states[0]), actions, rewards[0], np.array(next_states[0]), np.all(dones)]]
+                model.store(sample)
 
             obs = obs_
-
-            epi_reward.append(np.mean(reward, axis=0))
+            epi_reward.append(np.mean(reward, axis=0)) # (#episode, #agent)
             loss = None
 
             # Non-epsodic update of the model
-            if not args.algorithm_spec['episodic_update'] and overall_steps > args.train_start_frame \
+            if not args.test and not args.algorithm_spec['episodic_update'] and overall_steps > args.train_start_frame \
                 and model.buffer.get_len() > args.batch_size:
                 if args.update_itr >= 1:
                     avg_loss = []
@@ -121,12 +126,14 @@ def rollout(env, model, args):
             ):  # if any player in a game is done, the game episode done; may not be correct for some envs
                 break
         
-        for i in range(env.num_agents):
-            writer.add_scalar(f"charts/episodic_return-player{i}", np.mean(epi_reward, axis=0)[i], epi)
-        writer.add_scalar(f"charts/loss", loss, epi)
-        writer.add_scalar(f"charts/episode_steps", step, epi)
-        print(f"Episode: {epi}, Reward: {np.mean(epi_reward, axis=0)[0]:.4f}, Loss: {loss:.4f}")
-
+        if not args.test:
+            for i in range(env.num_agents):
+                writer.add_scalar(f"charts/episodic_return-player{i}", np.sum(epi_reward, axis=0)[i], epi)
+            writer.add_scalar(f"charts/loss", loss, epi)
+            writer.add_scalar(f"charts/episode_steps", step, epi)
+            print(f"Episode: {epi}, Reward: {np.sum(epi_reward, axis=0)[0]:.4f}, Loss: {loss:.4f}")
+        else:
+            print(f"Episode: {epi}, Reward: {np.sum(epi_reward, axis=0)[0]:.4f}")
 
         ## Evaluation during exploiter training
         # if epi % args.log_interval == 0:
@@ -136,7 +143,7 @@ def rollout(env, model, args):
             # logger.print_and_save()
 
         # Model saving and logging
-        if epi % args.save_interval == 0:
+        if not args.test and epi % args.save_interval == 0:
             model.save_model(model_dir+f'{epi}')
 
 for env_type, envs in pettingzoo_envs.items():
@@ -149,6 +156,8 @@ for env_type, envs in pettingzoo_envs.items():
 
 
 args = get_args()
+if args.test:
+    args.num_envs = 1  # multiple envs vectorized (by supersuit wrapper) cannot be visualized
 
 if args.ram:
     obs_type = 'ram'
@@ -174,18 +183,24 @@ env = supersuit.dtype_v0(env, 'float32') # need to transform uint8 to float firs
 env = supersuit.normalize_obs_v0(env, env_min=0, env_max=1) # normalize the observation to (0,1)
 single_env = reward_lambda_v1(env, zero_sum_reward_filer)  # ensure zero-sum game
 single_env.agents = env_agents
-env = supersuit.pettingzoo_env_to_vec_env_v1(env)
-env = supersuit.concat_vec_envs_v1(env, args.num_envs, num_cpus=0, base_class="gym")  # true number of envs will be args.num_envs
-# env = gym.wrappers.RecordEpisodeStatistics(env)
-if args.record_video:
-    env.is_vector_env = True
-    vec_env = gym.wrappers.RecordVideo(env, f"data/videos/{args.env_type}_{args.env_name}_{args.algorithm}",\
-            step_trigger=lambda step: step % 10000 == 0, # record the videos every 10000 steps
-            video_length=100)  # for each video record up to 100 steps) 
+if args.num_envs > 1: # vectorized env for parallelization
+    env = supersuit.pettingzoo_env_to_vec_env_v1(env)
+    env = supersuit.concat_vec_envs_v1(env, args.num_envs, num_cpus=0, base_class="gym")  # true number of envs will be args.num_envs
+    # env = gym.wrappers.RecordEpisodeStatistics(env)
+    if args.record_video:
+        env.is_vector_env = True
+        vec_env = gym.wrappers.RecordVideo(env, f"data/videos/{args.env_type}_{args.env_name}_{args.algorithm}",\
+                step_trigger=lambda step: step % 10000 == 0, # record the videos every 10000 steps
+                video_length=100)  # for each video record up to 100 steps) 
 
-env.num_agents = single_env.num_agents
-env.agents = single_env.agents
-env = SSVecWrapper(env)
+    env.num_agents = single_env.num_agents
+    env.agents = single_env.agents
+    env = SSVecWrapper(env)
+else:
+    env.observation_space = list(env.observation_spaces.values())[0]
+    env.action_space = list(env.action_spaces.values())[0]
+    env.agents = env_agents    
+    env = Dict2TupleWrapper(env) 
 
 model = NashDQN(env, args)
 rollout(env, model, args)
