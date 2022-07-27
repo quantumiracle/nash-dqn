@@ -43,7 +43,7 @@ python launch.py --env pettingzoo_boxing_v2 --method nash_dqn --wandb_activate T
 Test after training:
 
 ```bash
-python launch.py --env pettingzoo_boxing_v2 --method nash_dqn --test --render
+python launch.py --env pettingzoo_boxing_v2 --method nash_dqn --test True --load_model_idx './model/boxing_v2_NashDQN_2022-07-26-17-42-20/2000' --render True
 ```
 
 ## Detailed Instructions
