@@ -24,7 +24,7 @@ class NashDQN(DQN):
         self.args = args
 
         # don't forget to instantiate an optimizer although there is one in DQN
-        self.optimizer = optim.Adam(self.model.parameters(), lr=float(args.learning_rate))
+        self._init_optimizer(args)
 
     def _init_model(self, env, args):
         """Overwrite DQN's models
@@ -141,7 +141,6 @@ class NashDQN(DQN):
 
         expected_q_value = reward + (self.gamma ** self.multi_step) * next_q_value * (1 - done)
 
-        # Huber Loss
         loss = F.mse_loss(q_value, expected_q_value.detach(), reduction='none')
         loss = loss.mean()
 

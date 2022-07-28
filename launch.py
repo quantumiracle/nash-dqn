@@ -7,6 +7,7 @@ from datetime import datetime
 from common.wrappers import pettingzoo_envs, reward_lambda_v1, zero_sum_reward_filer, SSVecWrapper, Dict2TupleWrapper
 from common.args_parser import get_args, init_wandb
 from nash_dqn import NashDQN
+from nash_dqn_exploiter import NashDQNExploiter
 
 
 def rollout(env, model, args):
@@ -202,5 +203,5 @@ else:
     env.agents = env_agents    
     env = Dict2TupleWrapper(env) 
 
-model = NashDQN(env, args)
+model = eval(args.algorithm)(env, args)  # NashDQN or NashDQNExploiter
 rollout(env, model, args)
