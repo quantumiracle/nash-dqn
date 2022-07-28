@@ -14,9 +14,9 @@ The **Nash-DQN** and **Nash-DQN-with-Exploiter** algorithms are also compared ag
 * `nash_dqn.py` is the implementation of the Nash-DQN algorithm;
 * `nash_dqn_exploiter.py` is the implementation of the Nash-DQN-with-Exploiter algorithm;
 * `launch.py` is the launching script for train/test the algorithm;
-* `default.yaml` is the default configurations;
-* `pettingzoo_boxing_v2_nash_dqn.yaml` is an example configuration script for PettingZoo Boxing-v2 with Nash-DQN algorithm. Note that it will overwrite the same entries in the default configurations;
-* `pettingzoo_boxing_v2_nash_dqn_exploiter.yaml` is an example configuration script for PettingZoo Boxing-v2 with Nash-DQN-with-Exploiter algorithm. Note that it will overwrite the same entries in the default configurations;
+* `confs/default.yaml` is the default configurations;
+* `confs/pettingzoo_boxing_v2_nash_dqn.yaml` is an example configuration script for PettingZoo Boxing-v2 with Nash-DQN algorithm. Note that it will overwrite the same entries in the default configurations;
+* `confs/pettingzoo_boxing_v2_nash_dqn_exploiter.yaml` is an example configuration script for PettingZoo Boxing-v2 with Nash-DQN-with-Exploiter algorithm. Note that it will overwrite the same entries in the default configurations;
 
 
 
