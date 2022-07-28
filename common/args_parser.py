@@ -154,8 +154,8 @@ def get_parser_args():
 
 def get_default_args(env, method):
     [env_type, env_name] = env.split('_', 1) # only split at the first '_'
-    yaml_file = f'{env_type}_{env_name}_{method}'
-    args = LoadYAML2Dict(yaml_file, toAttr=True, mergeWith='default.yaml')
+    yaml_file = f'confs/{env_type}_{env_name}_{method}'
+    args = LoadYAML2Dict(yaml_file, toAttr=True, mergeWith='confs/default.yaml')
     return args
 
 
