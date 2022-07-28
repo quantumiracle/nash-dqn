@@ -1,8 +1,8 @@
 # Nash-DQN
 
-This repository provides a standalone version of **Nash-DQN** algorithm for two-player zero-sum Markov games, details see [**our paper**: A Deep Reinforcement Learning Approach for Finding Non-Exploitable Strategies in Two-Player Atari Games. Zihan Ding, Dijia Su, Qinghua Liu, Chi Jin](https://arxiv.org/abs/2207.08894). 
+This repository provides a standalone version of **Nash-DQN** and **Nash-DQN-with-Exploiter** algorithm for two-player zero-sum Markov games, details see [**our paper**: A Deep Reinforcement Learning Approach for Finding Non-Exploitable Strategies in Two-Player Atari Games. Zihan Ding, Dijia Su, Qinghua Liu, Chi Jin](https://arxiv.org/abs/2207.08894). 
 
-The **Nash-DQN** algorithm is also compared against other baselines methods like Self-play, Fictitious Self-play, Neural Fictitious Self-play, Policy Space Response Oracle, but in another library called [**MARS**](https://github.com/quantumiracle/MARS).
+The **Nash-DQN** and **Nash-DQN-with-Exploiter** algorithms are also compared against other baselines methods like Self-play, Fictitious Self-play, Neural Fictitious Self-play, Policy Space Response Oracle, but in another library called [**MARS**](https://github.com/quantumiracle/MARS).
 
 ## File Structure
 
@@ -12,10 +12,11 @@ The **Nash-DQN** algorithm is also compared against other baselines methods like
 * `agent.py` is the base class of learning agents;
 * `dqn.py` is the implementation of the DQN algorithm that Nash-DQN inherits;
 * `nash_dqn.py` is the implementation of the Nash-DQN algorithm;
+* `nash_dqn_exploiter.py` is the implementation of the Nash-DQN-with-Exploiter algorithm;
 * `launch.py` is the launching script for train/test the algorithm;
 * `default.yaml` is the default configurations;
 * `pettingzoo_boxing_v2_nash_dqn.yaml` is an example configuration script for PettingZoo Boxing-v2 with Nash-DQN algorithm. Note that it will overwrite the same entries in the default configurations;
-
+* `pettingzoo_boxing_v2_nash_dqn_exploiter.yaml` is an example configuration script for PettingZoo Boxing-v2 with Nash-DQN-with-Exploiter algorithm. Note that it will overwrite the same entries in the default configurations;
 
 
 
@@ -34,10 +35,12 @@ Others are general ML packages, like torch, tensorboard, numpy, gym, pettingzoo,
 
 ## Quick Start
 
-To train Nash-DQN on two-agent zero-sum game, *boxing-v2* in Pettingzoo, run:
+To train Nash-DQN/Nash-DQN-with-Exploiter on two-agent zero-sum game, *boxing-v2* in Pettingzoo, run:
 
 ```bash
 python launch.py --env pettingzoo_boxing_v2 --method nash_dqn
+python launch.py --env pettingzoo_boxing_v2 --method nash_dqn_exploiter
+
 ```
 
 Train with [Wandb](https://wandb.ai) (for logging training results):
