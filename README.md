@@ -9,8 +9,14 @@ The **Nash-DQN** algorithm is also compared against other baselines methods like
 * `equilibrium_solver/` contains different solvers for Nash equilibrium, including [ECOS](https://github.com/embotech/ecos), [Nashpy](https://github.com/drvinceknight/Nashpy), [PuLP](https://github.com/coin-or/pulp), [CVXPY](https://github.com/cvxpy/cvxpy), [Gurobipy](https://www.gurobi.com/), etc.
 * `solver_comparison.ipynb` provides a time and solvability analysis for all solvers implemented in this repo;
 * `common/` contains all necessary RL components, including networks, env wrappers, buffers, training arguments, etc;
+* `agent.py` is the base class of learning agents;
+* `dqn.py` is the implementation of the DQN algorithm that Nash-DQN inherits;
 * `nash_dqn.py` is the implementation of the Nash-DQN algorithm;
-* `bilateral_dqn.py` is to train two agents (DQN) at the same time;
+* `launch.py` is the launching script for train/test the algorithm;
+* `default.yaml` is the default configurations;
+* `pettingzoo_boxing_v2_nash_dqn.yaml` is an example configuration script for PettingZoo Boxing-v2 with Nash-DQN algorithm. Note that it will overwrite the same entries in the default configurations;
+
+
 
 
 
