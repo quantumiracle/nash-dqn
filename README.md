@@ -23,15 +23,24 @@ The **Nash-DQN** and **Nash-DQN-with-Exploiter** algorithms are also compared ag
 
 ## Requirements
 
+* Using Conda environment:
 ```bash
 pip install -r requirements.txt
+AutoROM --accept-license
 ```
 
 The ECOS solver is needed, which can be installed via `pip install ecos`.
 
 Others are general ML packages, like torch, tensorboard, numpy, gym, pettingzoo, supersuit, etc.
 
-
+* Using [Poetry](https://python-poetry.org/):
+```
+git clone https://github.com/quantumiracle/nash-dqn.git && cd nash-dqn
+poetry install 
+poetry run AutoROM --accept-license
+poetry run pip install torch --upgrade --extra-index-url https://download.pytorch.org/whl/cu113
+poetry run python launch.py --env pettingzoo_boxing_v2 --method nash_dqn
+```
 
 ## Quick Start
 
