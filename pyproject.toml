@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "nash-dqn"
+version = "0.1.0"
+description = ""
+authors = ["Zihan Ding <zhding96@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.7,<3.11"
+SuperSuit = "3.4"
+PettingZoo = "1.18.1"
+gym = "0.22.0"
+cvxpy = "1.1.15"
+PuLP = "2.6"
+AutoROM = {extras = ["accept-rom-license"], version = "^0.4.2"}
+gurobipy = "9.5.2"
+tensorboard = "^2.10.0"
+PyYAML = "^6.0"
+wandb = "^0.13.1"
+multi-agent-ale-py = "^0.1.11"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
