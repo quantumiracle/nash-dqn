@@ -25,6 +25,7 @@ The **Nash-DQN** and **Nash-DQN-with-Exploiter** algorithms are also compared ag
 
 * Using Conda environment:
 ```bash
+git clone https://github.com/quantumiracle/nash-dqn.git && cd nash-dqn
 pip install -r requirements.txt
 AutoROM --accept-license
 ```
