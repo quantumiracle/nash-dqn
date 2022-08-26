@@ -208,7 +208,7 @@ def get_args():
     * '--wandb_activate', type=bool, default=False, help='activate wandb for logging'
     * '--wandb_entity', type=str, default='', help='wandb entity'
     * '--wandb_project', type=str, default='', help='wandb project'
-    * '--wandb_group', type=str, default='', help='wandb project'
+    * '--wandb_group', type=str, default='', help='wandb group'
     * '--wandb_name', type=str, default='', help='wandb name'
     * '--net_architecture.hidden_dim_list', type=str, default='[128, 128, 128]', help='list of hidden dimensions for model'
     * '--net_architecture.hidden_activation', type=str, default='ReLU', help='hidden activation function'
